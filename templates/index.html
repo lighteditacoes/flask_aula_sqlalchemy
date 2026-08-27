@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}
+Visualizar Livros
+{% endblock %}
+
+{% block conteudo %}
+
+
+    <h1>Livros</h1>
+
+    <form action="{{ url_for('inserir') }}" method="post">
+        <label for="nome">Título</label>
+        <input name="titulo" type="text">
+        <label for="nome">Autor</label>
+        <input name="autor" type="text">
+        <label for="nome">Ano</label>
+        <input name="ano" type="text">
+        <button type="submit">Enviar</button>
+    </form>
+
+    {% for livro in livros %}
+    <ul>
+        <li>{{ livro.titulo }}</li>
+        <li>{{ livro.autor }}</li>
+        <li>{{ livro.ano }}</li>
+        <form class="form-deletar" action="{{ url_for('deletar', id=livro.id_livro)}}" method="post">
+            <!-- <input type="hidden" name="confirmacao" value=""> -->
+            <button type="submit">Deletar</button>
+        </form>
+        <a href="{{ url_for('editar', id=livro.id_livro) }}"><button type="button">Editar</button></a>
+    </ul>
+    {% endfor %}
+
+<script>
+
+    const formularios = document.querySelectorAll('.form-deletar');
+
+    formularios.forEach(form => {
+        form.addEventListener('submit', function(event) {
+            if (!confirm('Deseja deletar o livro?')) {
+                event.preventDefault(); // Cancela o envio do formulário
+            }
+        });
+    });
+
+    //     let form = document.getElementById("form-deletar")
+    //     let btn = document.getElementById("btn-deletar")
+
+    //         function deletar(){
+    //             if(confirm('Deseja deletar o produto?')){
+    //                 form.submit();
+    //             }
+    //         }
+
+    //    btn.onclick = deletar
+
+</script>
+
+{% endblock %}

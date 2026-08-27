@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+Editar Livro
+{% endblock %}
+
+{% block conteudo %}
+
+<h1>Editar Livro</h1>
+
+<form action="{{ url_for('editar', id=id_livro) }}" method="post">
+    <label for="nome">Título</label>
+    <input name="titulo" type="text" value="{{ livro.titulo }}">
+    <label for="nome">Autor</label>
+    <input name="autor" type="text" value="{{ livro.autor }}">
+    <label for="nome">Ano</label>
+    <input name="ano" type="number" value="{{ livro.ano }}">
+    <button type="submit">Enviar</button>    
+</form>
+
+{% endblock %}
