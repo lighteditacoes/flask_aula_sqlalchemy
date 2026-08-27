@@ -1,4 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request
+from flask_migrate import Migrate
 from db import db
 from model import Usuario, Livro
 
@@ -6,6 +7,7 @@ from model import Usuario, Livro
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///estante.db'
 db.init_app(app)
+migrate=Migrate(app, db)
 
 
 @app.route('/')
@@ -23,8 +25,9 @@ def inserir():
             titulo = request.form["titulo"]
             autor = request.form["autor"]
             ano = request.form["ano"]
-            livro = Livro(titulo=titulo, autor=autor, ano=ano)
-            #livro = Livro(titulo=request.form["titulo"], autor=request.form["autor"], ano=request.form["ano"])
+            genero = request.form["genero"]
+            livro = Livro(titulo=titulo, autor=autor, ano=ano, genero=genero)
+            #livro = Livro(titulo=request.form["titulo"], autor=request.form["autor"], ano=request.form["ano"], genero=request.form["genero"])
 
             db.session.add(livro)
             db.session.commit()
@@ -38,9 +41,7 @@ def deletar(id):
     try:
         if request.method == "POST":
             livro = db.session.get(Livro, id)
-            print("a")
             db.session.delete(livro)
-            print("aaaaa")
             db.session.commit()
 
             return redirect(url_for('home'))
@@ -56,6 +57,7 @@ def editar(id):
             livro.titulo = request.form["titulo"] # ou request.form.get('titulo')
             livro.autor = request.form["autor"] # ou request.form.get('autor')
             livro.ano = request.form["ano"] # ou request.form.get('ano')
+            livro.genero = request.form["genero"] # ou request.form.get('genero')
             db.session.commit()
             return redirect(url_for('home'))
         return render_template("editar.html", id_livro=id, livro=livro)

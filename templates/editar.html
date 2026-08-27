@@ -8,6 +8,8 @@ Editar Livro
 
 <h1>Editar Livro</h1>
 
+<h2>Você está editando {{ livro.titulo }}</h2>
+
 <form action="{{ url_for('editar', id=id_livro) }}" method="post">
     <label for="nome">Título</label>
     <input name="titulo" type="text" value="{{ livro.titulo }}">
@@ -15,6 +17,8 @@ Editar Livro
     <input name="autor" type="text" value="{{ livro.autor }}">
     <label for="nome">Ano</label>
     <input name="ano" type="number" value="{{ livro.ano }}">
+    <label for="nome">Gênero</label>
+    <input name="genero" type="text" value="{{ livro.genero }}">
     <button type="submit">Enviar</button>    
 </form>
 

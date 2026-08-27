@@ -15,8 +15,10 @@ Visualizar Livros
         <label for="nome">Autor</label>
         <input name="autor" type="text">
         <label for="nome">Ano</label>
-        <input name="ano" type="text">
-        <button type="submit">Enviar</button>
+        <input name="ano" type="number">
+        <label for="nome">Genero</label>
+        <input name="genero" type="text">
+        <button type="submit">Inserir</button>
     </form>
 
     {% for livro in livros %}
@@ -24,6 +26,7 @@ Visualizar Livros
         <li>{{ livro.titulo }}</li>
         <li>{{ livro.autor }}</li>
         <li>{{ livro.ano }}</li>
+        <li>{{ livro.genero }}</li>
         <form class="form-deletar" action="{{ url_for('deletar', id=livro.id_livro)}}" method="post">
             <!-- <input type="hidden" name="confirmacao" value=""> -->
             <button type="submit">Deletar</button>
