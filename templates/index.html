@@ -9,7 +9,7 @@ Visualizar Livros
 
     <h1>Livros</h1>
 
-    <form action="{{ url_for('inserir') }}" method="post">
+    <form action="{{ url_for('livros.inserir') }}" method="post">
         <label for="nome">Título</label>
         <input name="titulo" type="text">
         <label for="nome">Autor</label>
@@ -27,11 +27,11 @@ Visualizar Livros
         <li>{{ livro.autor }}</li>
         <li>{{ livro.ano }}</li>
         <li>{{ livro.genero }}</li>
-        <form class="form-deletar" action="{{ url_for('deletar', id=livro.id_livro)}}" method="post">
+        <form class="form-deletar" action="{{ url_for('livros.deletar', id=livro.id_livro)}}" method="post">
             <!-- <input type="hidden" name="confirmacao" value=""> -->
             <button type="submit">Deletar</button>
         </form>
-        <a href="{{ url_for('editar', id=livro.id_livro) }}"><button type="button">Editar</button></a>
+        <a href="{{ url_for('livros.editar', id=livro.id_livro) }}"><button type="button">Editar</button></a>
     </ul>
     {% endfor %}
 
